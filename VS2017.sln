@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaYumba.Functional", "LaYumba.Functional\LaYumba.Functional.csproj", "{7501EA9C-5E54-49EC-8D92-B8F8EF7BCB59}"
 EndProject
@@ -12,6 +12,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercises", "Exercises\Exercises.csproj", "{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaYumba.Functional.Tests", "LaYumba.Functional.Tests\LaYumba.Functional.Tests.csproj", "{9425D69D-68D8-4773-934D-068488790118}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A39D0A2-58B2-4952-B117-95B1E4F1DBD2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		setupRepl.csx = setupRepl.csx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

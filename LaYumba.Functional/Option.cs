@@ -17,7 +17,7 @@ namespace LaYumba.Functional
    {
       readonly T value;
       readonly bool isSome;
-      bool isNone => !isSome;
+      public bool isNone => !isSome;
 
       private Option(T value)
       {
