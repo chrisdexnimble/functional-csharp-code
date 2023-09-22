@@ -21,10 +21,10 @@ namespace Exercises.Chapter03
             // Enum.Parse<DayOfWeek>("Friday") // => Some(DayOfWeek.Friday)
             // Enum.Parse<DayOfWeek>("Freeday") // => None
 
-            Option<DayOfWeek> s = "Friday".Parse<DayOfWeek>();
+            Option<DayOfWeek> s = "Friday".ChrisParse<DayOfWeek>();
             s.Should().Be(Some(DayOfWeek.Friday)); 
 
-            Option<DayOfWeek> n = "Freeday".Parse<DayOfWeek>();
+            Option<DayOfWeek> n = "Freeday".ChrisParse<DayOfWeek>();
             // why can't i assert this as none?
             //n.Should().Be(F.None);
             n.isNone.Should().BeTrue();
@@ -40,15 +40,15 @@ namespace Exercises.Chapter03
             // new List<int>().Lookup(isOdd) // => None
             // new List<int> { 1 }.Lookup(isOdd) // => Some(1)
             var nums = new[] { 1, 2, 3, 4, 5 };
-            nums.Lookup((x) => x == 3)
+            nums.ChrisLookup((x) => x == 3)
                 .Should().Be(Some(3));
 
             bool isOdd(int i) => i % 2 == 1;
             
-            new List<int>().Lookup(isOdd)
+            new List<int>().ChrisLookup(isOdd)
                 .isNone.Should().BeTrue();
 
-            new List<int> { 1 }.Lookup(isOdd)
+            new List<int> { 1 }.ChrisLookup(isOdd)
                 .Should().Be(Some(1));
         }
 
@@ -62,7 +62,8 @@ namespace Exercises.Chapter03
             // for sending emails
 
             ChrisEmail.Of("Chris@Here.com").Should().BeOfType<Option<ChrisEmail>>();
-            ChrisEmail.Of("Chris@Here.com").Match(() => Assert.False(true), x => x.ToString().Should().Be("Chris@Here.com"));
+            ChrisEmail.Of("Chris@Here.com").Match(() => Assert.False(true), x => (x == "Chris@Here.com").Should().BeTrue());
+
             ChrisEmail.Of("ChrisNotHere.com").isNone.Should().BeTrue();
         }
     }

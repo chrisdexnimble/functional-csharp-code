@@ -18,7 +18,7 @@ namespace Exercises.Chapter3
         // Enum.Parse<DayOfWeek>("Friday") // => Some(DayOfWeek.Friday)
         // Enum.Parse<DayOfWeek>("Freeday") // => None
 
-        static Option<T> Parse<T>(this string value) where T : struct =>
+        public static Option<T> ChrisParse<T>(this string value) where T : struct =>
             System.Enum.TryParse<T>(value, false, out var result) ? Some(result) : F.None;
 
 
@@ -30,8 +30,10 @@ namespace Exercises.Chapter3
         // new List<int> { 1 }.Lookup(isOdd) // => Some(1)
 
 
-        static Option<T> Lookup<T>(this IEnumerable<T> t, Func<T, bool> predicate)
+        public static Option<T> ChrisLookup<T>(this IEnumerable<T> t, Func<T, bool> predicate)
         {
+            if (!t.Any()) return F.None;
+
             var r = t.FirstOrDefault(x => predicate(x) == true);
             return r != null ? Some(r) : F.None;
         }
@@ -62,7 +64,7 @@ namespace Exercises.Chapter3
               IsValid(value) ? Some(new ChrisEmail(value)) : F.None;
 
           public static implicit operator string(ChrisEmail email)
-              => email.ToString();
+              => email._value.ToString();
       }
 
       // 4 Take a look at the extension methods defined on IEnumerable inSystem.LINQ.Enumerable.
