@@ -90,7 +90,7 @@ namespace Exercises.Chapter03
 
         [Fact]
         public void AppConfig2()
-        {
+        { 
             var configValues = new NameValueCollection(3)
             {
                 { "FeatureName", "MyFeature" },
