@@ -97,9 +97,7 @@ namespace Exercises.Chapter3
         return string.IsNullOrEmpty(value) ? F.None : Some((T)Convert.ChangeType(value, typeof(T)));
       }
 
-      public T Get<T>(string name, T defaultValue)
-      {
-         throw new NotImplementedException("your implementation here...");
-      }
+      public T Get<T>(string name, T defaultValue)=>
+        Get<T>(name).Match(() => defaultValue, (t) => t);
    }
 }

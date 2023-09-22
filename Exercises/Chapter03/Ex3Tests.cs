@@ -69,13 +69,15 @@ namespace Exercises.Chapter03
         }
 
         [Fact]
-        public void AppConfig()
+        public void AppConfig1()
         {
-            var configValues = new NameValueCollection(3);
-            configValues.Add("FeatureName", "MyFeature");
-            configValues.Add("FeatureOn", "false");
-            configValues.Add("FeatureValue", "3");
-            configValues.Add("FeatureDate", "1-Oct-2020");
+            var configValues = new NameValueCollection(3)
+            {
+                { "FeatureName", "MyFeature" },
+                { "FeatureOn", "false" },
+                { "FeatureValue", "3" },
+                { "FeatureDate", "1-Oct-2020" }
+            };
             var conf = new ChrisAppConfig(configValues);
             
             conf.Get<string>("FeatureName").Match(() => Assert.False(true, "Should match"), s => s.Should().Be("MyFeature"));
@@ -84,6 +86,23 @@ namespace Exercises.Chapter03
             conf.Get<bool>("FeatureOn").Match(() => Assert.False(true, "Should match"), b => b.Should().BeFalse());
             conf.Get<int>("FeatureValue").Match(() => Assert.False(true, "Should match"), n => n.Should().Be(3));
             conf.Get<DateTime>("FeatureDate").Match(() => Assert.False(true, "Should match"), d => d.Should().Be(DateTime.Parse("1-Oct-2020")));
+        }
+
+        [Fact]
+        public void AppConfig2()
+        {
+            var configValues = new NameValueCollection(3)
+            {
+                { "FeatureName", "MyFeature" },
+                { "FeatureOn", "true" }
+            };
+            var conf = new ChrisAppConfig(configValues);
+            
+            conf.Get<string>("FeatureName", "XXX").Should().Be("MyFeature");
+            conf.Get<string>("NotFound", "XXX").Should().Be("XXX");
+
+            conf.Get<bool>("FeatureOn", false).Should().BeTrue();
+            conf.Get<bool>("NotFound", false).Should().BeFalse();
         }
     }
 }
