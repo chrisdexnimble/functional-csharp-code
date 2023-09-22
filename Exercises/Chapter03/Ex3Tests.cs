@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Security.Cryptography.X509Certificates;
 using Exercises.Chapter3;
 using FluentAssertions;
@@ -65,6 +66,24 @@ namespace Exercises.Chapter03
             ChrisEmail.Of("Chris@Here.com").Match(() => Assert.False(true), x => (x == "Chris@Here.com").Should().BeTrue());
 
             ChrisEmail.Of("ChrisNotHere.com").isNone.Should().BeTrue();
+        }
+
+        [Fact]
+        public void AppConfig()
+        {
+            var configValues = new NameValueCollection(3);
+            configValues.Add("FeatureName", "MyFeature");
+            configValues.Add("FeatureOn", "false");
+            configValues.Add("FeatureValue", "3");
+            configValues.Add("FeatureDate", "1-Oct-2020");
+            var conf = new ChrisAppConfig(configValues);
+            
+            conf.Get<string>("FeatureName").Match(() => Assert.False(true, "Should match"), s => s.Should().Be("MyFeature"));
+            conf.Get<string>("NotFound").Match(() => Assert.True(true, "Should be none"), s=> Assert.False(true, "Should not match"));
+
+            conf.Get<bool>("FeatureOn").Match(() => Assert.False(true, "Should match"), b => b.Should().BeFalse());
+            conf.Get<int>("FeatureValue").Match(() => Assert.False(true, "Should match"), n => n.Should().Be(3));
+            conf.Get<DateTime>("FeatureDate").Match(() => Assert.False(true, "Should match"), d => d.Should().Be(DateTime.Parse("1-Oct-2020")));
         }
     }
 }
